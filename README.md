@@ -10,18 +10,23 @@ This repository contains examples and **my** best practices for building Ansible
 
 ## Usage
 
-- Install GitBucket to local VM by Vagrant  
+### Install GitBucket to local VM by Vagrant
+
 ```bash
 $ vagrant up gitbucket
 ```
 
-- Install GitBucket to stage server  
-Write stage server IP to `GitBucket/inventories/stage`,  
+### Install GitBucket to stage server
+
+Write stage server IP to `GitBucket/inventories/stage`,
+
 ```
 [stage-gitbucket]
 # write stage gitbucket host
 ```
-then  
+
+then
+
 ```bash
 $ cd GitBucket && ansible-playbook -i inventories/stage site.yml
 ```
