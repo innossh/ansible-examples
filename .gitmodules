@@ -1,0 +1,3 @@
+[submodule "GitBucket"]
+	path = GitBucket
+	url = git@github.com:innossh/playbook-gitbucket.git

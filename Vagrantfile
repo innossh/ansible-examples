@@ -29,6 +29,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
       vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
     end
+
+    gitbucket.vm.provision :ansible do |ansible|
+      ansible.playbook = "GitBucket/site.yml"
+      ansible.inventory_path = "GitBucket/inventories/local"
+    end
   end
 
 end
