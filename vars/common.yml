@@ -1,0 +1,6 @@
+---
+# common vars
+local_vms:
+  gitbucket:
+    private_network_ip: "192.168.33.11"
+    hosts: "local.gitbucket.sample.com"
