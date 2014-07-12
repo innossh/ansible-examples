@@ -1,0 +1,19 @@
+---
+# Install httpd tasks
+- name: install httpd
+  yum: name={{ item }} state=installed
+  with_items:
+    - httpd
+    - httpd-devel
+
+- name: modify httpd.conf NameVirtualHost
+  lineinfile: dest=/etc/httpd/conf/httpd.conf regexp="NameVirtualHost \*:80" line="NameVirtualHost *:80" 
+
+- name: create old log directory
+  file: path=/var/log/httpd/old state=directory owner=root group=root mode=0755
+
+- name: set httpd logrotate configuration
+  copy: src=httpd dest=/etc/logrotate.d/httpd owner=root group=root mode=0644
+
+- name: enable service httpd
+  service: name=httpd state=started enabled=yes

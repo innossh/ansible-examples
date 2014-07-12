@@ -1,0 +1,14 @@
+/var/log/httpd/*log {
+    compress
+    copytruncate
+    missingok
+    daily
+    ifempty
+    olddir /var/log/httpd/old
+    rotate 30
+    sharedscripts
+    postrotate
+        /sbin/service httpd reload > /dev/null 2>/dev/null || true
+    endscript
+}
+

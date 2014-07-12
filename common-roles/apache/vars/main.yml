@@ -1,0 +1,3 @@
+---
+# Apache vars
+httpd_port: 80

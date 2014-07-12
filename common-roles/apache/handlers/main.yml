@@ -1,0 +1,4 @@
+---
+# Apache handler tasks
+- name: restart httpd
+  service: name=httpd state=restarted
