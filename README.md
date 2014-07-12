@@ -16,6 +16,12 @@ $ vagrant up gitbucket
 ```
 
 - Install GitBucket to stage server  
+Write stage server IP to `GitBucket/inventories/stage`,  
+```
+[stage-gitbucket]
+# write stage gitbucket host
+```
+then  
 ```bash
 $ cd GitBucket && ansible-playbook -i inventories/stage site.yml
 ```
