@@ -1,0 +1,43 @@
+---
+# Install jetty tasks
+- name: install jdk 1.7
+  yum: name={{ item }} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+
+- name: download jetty archive
+  get_url: url="{{ jetty_download_url }}" dest="{{ download_path }}/{{ jetty_archive_file }}"
+
+- name: unarchive jetty archive
+  command: tar zxf {{ jetty_archive_file }} -C /opt
+  args:
+    chdir: "{{ download_path }}/"
+    creates: "/opt/{{ jetty_archive_name }}"
+  register: jetty_installed
+
+- name: create jetty symlink
+  file: src=/opt/{{ jetty_archive_name }} dest=/opt/jetty state=link
+  when: jetty_installed|changed
+
+- name: create jetty user
+  user: name=jetty uid={{ jetty_uid }} comment=Jetty home=/opt/jetty createhome=no shell=/sbin/nologin system=yes
+
+- name: change owner jetty home directory
+  file: path=/opt/{{ jetty_archive_name }} recurse=yes owner=jetty group=jetty state=directory
+
+- name: set jetty configuration file /etc/default/jetty
+  copy: src=jetty dest=/etc/default/jetty owner=root group=root mode=0644
+
+- name: copy jetty init script
+  command: cp -p /opt/jetty/bin/jetty.sh /etc/init.d/jetty
+  when: jetty_installed|changed
+
+- name: change owner jetty init script
+  file: path=/etc/init.d/jetty owner=root group=root mode=0755
+
+- name: enable service jetty
+  service: name=jetty state=started enabled=yes
+
+- name: create jetty work directory
+  file: path=/opt/jetty/work state=directory owner=jetty group=jetty mode=0775
+  notify: restart jetty

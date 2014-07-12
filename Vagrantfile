@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :gitbucket do |gitbucket|
     gitbucket.vm.hostname = "vm-gitbucket"
-    gitbucket.vm.network "private_network", ip: local_vms["gitbucket"]["private_network_ip"]
+    gitbucket.vm.network "private_network", ip: "192.168.33.11"
     gitbucket.hostsupdater.aliases = [local_vms["gitbucket"]["hosts"]]
 
     gitbucket.vm.provider :virtualbox do |vb|

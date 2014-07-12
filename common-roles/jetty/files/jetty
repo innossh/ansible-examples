@@ -1,0 +1,24 @@
+# See http://wiki.eclipse.org/Jetty/Howto/Garbage_Collection
+
+JETTY_HOME=/opt/jetty
+JETTY_USER=jetty
+JETTY_SHELL=/bin/bash
+JETTY_PORT=8080
+JETTY_LOGS=logs
+
+JAVA_OPTIONS="-server -Xms512m -Xmx512m -Xmn256m \
+-XX:MaxPermSize=64m -XX:PermSize=64m \
+-XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=85 \
+-XX:+PrintClassHistogram -XX:+HeapDumpOnOutOfMemoryError \
+-XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=60 \
+-XX:+CMSParallelRemarkEnabled -XX:+UseParNewGC -XX:+DisableExplicitGC \
+-XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=10M \
+-XX:+PrintClassHistogramBeforeFullGC -XX:+PrintClassHistogramAfterFullGC \
+-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps \
+-XX:+PrintTenuringDistribution -XX:+PrintCommandLineFlags \
+-verbose:gc -Xloggc:$JETTY_HOME/logs/gc.log \
+-Dcom.sun.management.jmxremote=true \
+-Dcom.sun.management.jmxremote.authenticate=false \
+-Dcom.sun.management.jmxremote.ssl=false \
+-Dcom.sun.management.jmxremote.port=5400"
+

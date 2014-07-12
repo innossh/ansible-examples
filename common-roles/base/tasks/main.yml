@@ -1,0 +1,6 @@
+---
+# Base Setup
+- name: install useful packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - gzip

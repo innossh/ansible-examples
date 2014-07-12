@@ -1,0 +1,7 @@
+---
+# Jetty vars
+jetty_full_version: "9.2.1.v20140609"
+jetty_archive_name: "jetty-distribution-{{ jetty_full_version }}"
+jetty_archive_file: "{{ jetty_archive_name }}.tar.gz"
+jetty_download_url: "http://download.eclipse.org/jetty/{{ jetty_full_version }}/dist/{{ jetty_archive_file }}"
+jetty_uid: "1001"
